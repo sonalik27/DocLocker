@@ -1,4 +1,5 @@
 package com.lockers.lockedme;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -84,7 +85,6 @@ public class DocLockerApp {
 				System.out.println("Error:" + dle.getMessage());
 				showMainScreenInputMessage();
 			}catch(Exception e) {
-				e.printStackTrace();
 				System.out.println("An error has occurred and the application needs to close.");
 				System.exit(0);
 			}
@@ -104,7 +104,7 @@ public class DocLockerApp {
 				int option= 0;
 				
 				try{
-					option = Integer.parseInt(sc.nextLine());     //reads string  
+					option = Integer.parseInt(sc.nextLine()); 
 				}catch(NumberFormatException nfe) {}
 			
 				switch(option) {
@@ -127,7 +127,6 @@ public class DocLockerApp {
 				System.out.println("Error:" + dle.getMessage());
 				showAndProcessOptionScreen();
 			}catch(Exception e) {
-				e.printStackTrace();
 				System.out.println("An error has occurred and the application needs to close.");
 				System.exit(0);
 			}
@@ -255,9 +254,11 @@ public class DocLockerApp {
 				File[] fileList = rootFolder.listFiles();
 				count = fileList.length;
 				System.out.println("  " + count + " files found \n");
-				Arrays.sort(fileList);
-				for(File file : fileList) {
-					printFileDetails(file); 
+				if(fileList!=null && fileList.length>0) {
+					Arrays.sort(fileList);
+					for(File file : fileList) {
+						printFileDetails(file); 
+					}
 				}
 			}catch(SecurityException se) {
 				throw new DocLockerException("Unable to list files.Access Denied");
