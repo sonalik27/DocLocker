@@ -140,7 +140,6 @@ public class DocLockerApp {
 		File rootFolder = new File(LOCKER_ROOT_FOLDER);
 		boolean rootDirExist = rootFolder.exists();
 		
-		
 		if(!rootDirExist) {			
 			rootDirExist = rootFolder.mkdir();
 		}
@@ -151,15 +150,6 @@ public class DocLockerApp {
 				throw new DocLockerException("Source File path cannot be empty.");
 			}else {
 			    File srcFile = new File(sourceFilePath);
-			    System.out.println("absolute" + srcFile.getAbsolutePath());
-			    try {
-					System.out.println("Cannonical" + srcFile.getCanonicalPath());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-//			    System.out.println(srcFile.getAbsolutePath());
 
 			    if(!srcFile.exists()) {
 			    	throw new DocLockerException("Invalid path, please check again : " + srcFile);
