@@ -15,49 +15,50 @@ public class DocLockerApp {
 	private static final String LOCKER_ROOT_FOLDER = "DocLockerData";
 		
 	public void start() {
+		showHeader();
 		showMainScreen();
 	}
 	
 	private void showMainScreen(){
-		showHeader();
 		showAndProcessMainScreen();
 	}
 	
-	private void showOptionsScreen(){
-		showHeader();
-		showAndProcessOptionScreen();
-	}
-
 	private void showHeader() {
 		System.out.println("--------------------------------------------------------------------------------------------------");
-		System.out.println("----------------------------------- Welcome to DocLocker ----------------------------------------");
+		System.out.println("----------------------------------- Welcome to DocLocker -----------------------------------------");
 		System.out.println("----------------------------------- Developer: Sonali Parab --------------------------------------");
-		System.out.println("--------------------------------------------------------------------------------------------------");		
+		System.out.println("--------------------------------------------------------------------------------------------------");
 	}
 	
-	
-	private void showOptionScreenInputMessage() {
+	private void showMainScreenInputMessage() {
+		System.out.println("--------------------------------------------------------------------------------------------------");
+		System.out.println("------------------------------------------- Main Screen   ----------------------------------------");
+		System.out.println("--------------------------------------------------------------------------------------------------");	
 		System.out.println("\nPlease select following options for respective actions to take");
 		System.out.println(" 1 - List files (Files are listed in ascending order by names)");
 		System.out.println(" 2 - Open menu of File Operations");
 		System.out.println(" 3 - Exit");
 		System.out.println(" Enter you option here : ");
-	}
+			
+	}	
 	
-	private void showMainScreenInputMessage() {
+	private void showOptionScreenInputMessage() {
+		System.out.println("--------------------------------------------------------------------------------------------------");
+		System.out.println("------------------------------------------- Options Screen ---------------------------------------");
+		System.out.println("--------------------------------------------------------------------------------------------------");	
 		System.out.println("\nPlease select following options for respective actions to take");
-		System.out.println(" 1 - Add");
-		System.out.println(" 2 - Delete");
-		System.out.println(" 3 - Search");
+		System.out.println(" 1 - Add File");
+		System.out.println(" 2 - Delete File");
+		System.out.println(" 3 - Search File");
 		System.out.println(" 4 - Back to Main Screen");
 		System.out.println("\n");	
-		System.out.println(" Enter you option here : ");		
-	}
+		System.out.println(" Enter you option here : ");	
+	}	
 	
 	private void showAndProcessMainScreen() {
 		boolean exit = false;
 		//Show UI
-		showOptionScreenInputMessage();
+		showMainScreenInputMessage();
 		
 		while(!exit) {
 			//Take Input and process
@@ -74,14 +75,14 @@ public class DocLockerApp {
 					case 2 : showAndProcessOptionScreen();break;
 					case 3 : exit = true; break;
 					default : System.out.println(ERROR_MESSAGE_INVALID_INPUT);		
-							  showOptionScreenInputMessage();
+							  showMainScreenInputMessage();
 				}
 			}catch(InputMismatchException  e) {
 				System.out.println(ERROR_MESSAGE_INVALID_INPUT);
-				showOptionScreenInputMessage();
+				showMainScreenInputMessage();
 			}catch(DocLockerException dle) {
 				System.out.println("Error:" + dle.getMessage());
-				showAndProcessOptionScreen();
+				showMainScreenInputMessage();
 			}catch(Exception e) {
 				e.printStackTrace();
 				System.out.println("An error has occurred and the application needs to close.");
@@ -93,7 +94,7 @@ public class DocLockerApp {
 	
 	private void showAndProcessOptionScreen() {
 		boolean exitOptionScreen = false;
-		showMainScreenInputMessage();
+		showOptionScreenInputMessage();
 		
 		while(!exitOptionScreen) {
 			//Take Input and process
@@ -105,7 +106,6 @@ public class DocLockerApp {
 				try{
 					option = Integer.parseInt(sc.nextLine());     //reads string  
 				}catch(NumberFormatException nfe) {}
-				//System.out.println("You have entered: "+ option);
 			
 				switch(option) {
 					case 1 : System.out.println("Please enter PATH of File to be Added: ");
@@ -118,7 +118,7 @@ public class DocLockerApp {
 					case 4 : showAndProcessMainScreen(); 
 							 exitOptionScreen = true; break;
 					default : System.out.println(ERROR_MESSAGE_INVALID_INPUT);
-							  showMainScreenInputMessage();
+							  showOptionScreenInputMessage();
 				}
 			}catch(InputMismatchException  ime) {
 				System.out.println("Error:" + ERROR_MESSAGE_INVALID_INPUT);
@@ -279,7 +279,7 @@ public class DocLockerApp {
 	private void printFileDetails(File file) {
 		if(file!=null && file.exists()){
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-			System.out.println(file.getName() + "\t\t\t" + sdf.format(file.lastModified()));
+			System.out.println(file.getName() + "\t\t" + sdf.format(file.lastModified()));
 		}
 	}
 	
