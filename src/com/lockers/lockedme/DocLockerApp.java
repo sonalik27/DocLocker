@@ -253,7 +253,7 @@ public class DocLockerApp {
 			try {
 				File[] fileList = rootFolder.listFiles();
 				count = fileList.length;
-				System.out.println("  " + count + " files found \n");
+				System.out.println("  " + count + " file(s) found \n");
 				if(fileList!=null && fileList.length>0) {
 					Arrays.sort(fileList);
 					for(File file : fileList) {
